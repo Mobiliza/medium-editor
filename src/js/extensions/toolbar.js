@@ -132,17 +132,20 @@
         },
 
         createToolbarButtons: function () {
-            var ul = this.document.createElement('ul'),
-                li,
-                btn,
-                buttons,
-                extension,
-                buttonName,
-                buttonOpts;
+           var ul = this.document.createElement('ul'),
+               group = this.document.createElement('div'),
+               li,
+               btn,
+               buttons,
+               extension,
+               buttonName,
+               buttonOpts;
 
             ul.id = 'medium-editor-toolbar-actions' + this.getEditorId();
             ul.className = 'medium-editor-toolbar-actions';
             ul.style.display = 'block';
+
+            ul.appendChild(group);
 
             this.buttons.forEach(function (button) {
                 if (typeof button === 'string') {
@@ -160,12 +163,21 @@
                 if (extension && typeof extension.getButton === 'function') {
                     btn = extension.getButton(this.base);
                     li = this.document.createElement('li');
+                    
+                   
                     if (MediumEditor.util.isElement(btn)) {
                         li.appendChild(btn);
                     } else {
                         li.innerHTML = btn;
                     }
-                    ul.appendChild(li);
+
+                    group.appendChild(li);
+
+                    if(extension.lastFromGroup){
+                        group = this.document.createElement('div');
+                        ul.appendChild(group);
+                    }
+                    // ul.appendChild(li);
                 }
             }, this);
 
