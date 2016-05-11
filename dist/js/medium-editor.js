@@ -1713,6 +1713,7 @@ MediumEditor.extensions = {};
         'on',
         'off',
         'subscribe',
+        'unsubscribe',
         'trigger'
 
     ].forEach(function (helper) {
