@@ -315,6 +315,8 @@
                 this.getToolbarElement().classList.remove('medium-editor-toolbar-active');
                 this.trigger('hideToolbar', {}, this.base.getFocusedElement());
             }
+
+            this.trigger('hidedToolbar', {}, this.base.getFocusedElement());
         },
 
         isToolbarDefaultActionsDisplayed: function () {
