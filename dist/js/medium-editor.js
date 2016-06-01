@@ -5856,13 +5856,16 @@ MediumEditor.extensions = {};
             }
         },
 
-        hideToolbar: function () {
-            if (this.isDisplayed()) {
+        hideToolbar: function (triggerHided) {          
+            var triggerHided = triggerHided !== undefined ? triggerHided : true,
+                isDisplayed = this.isDisplayed();
+
+            console.log('hideToolbar', triggerHided, isDisplayed);
+            if (isDisplayed) {                               
                 this.getToolbarElement().classList.remove('medium-editor-toolbar-active');
                 this.trigger('hideToolbar', {}, this.base.getFocusedElement());
-            }
-
-            this.trigger('hidedToolbar', {}, this.base.getFocusedElement());
+                if(triggerHided) this.trigger('hidedToolbar', {}, this.base.getFocusedElement());
+            }            
         },
 
         isToolbarDefaultActionsDisplayed: function () {
