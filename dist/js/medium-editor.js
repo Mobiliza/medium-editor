@@ -5974,6 +5974,7 @@ MediumEditor.extensions = {};
 
             // If the updateOnEmptySelection option is true, show the toolbar
             if (this.updateOnEmptySelection && this.static) {
+                this.trigger('hideToolbar', {}, this.base.getFocusedElement());
                 return this.showAndUpdateToolbar();
             }
 
