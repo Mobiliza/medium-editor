@@ -5773,27 +5773,32 @@ MediumEditor.extensions = {};
         },
 
         attachEventHandlers: function () {
-            // MediumEditor custom events for when user beings and ends interaction with a contenteditable and its elements
-            this.subscribe('blur', this.handleBlur.bind(this));
-            this.subscribe('focus', this.handleFocus.bind(this));
+                // MediumEditor custom events for when user beings and ends interaction with a contenteditable and its elements
+                this.subscribe('blur', this.handleBlur.bind(this));
+                this.subscribe('focus', this.handleFocus.bind(this));
 
-            // Updating the state of the toolbar as things change
-            this.subscribe('editableClick', this.handleEditableClick.bind(this));
-            this.subscribe('editableKeyup', this.handleEditableKeyup.bind(this));
+                // Updating the state of the toolbar as things change
+                this.subscribe('editableClick', this.handleEditableClick.bind(this));
+                this.subscribe('editableKeyup', this.handleEditableKeyup.bind(this));
 
-            // Handle mouseup on document for updating the selection in the toolbar
-            this.on(this.document.documentElement, 'mouseup', this.handleDocumentMouseup.bind(this));
+                // Handle mouseup on document for updating the selection in the toolbar
+                $(this.document.documentElement).off('mouseup');
+                $(this.document.documentElement).on('mouseup', this.handleDocumentMouseup.bind(this))
+                // this.document.documentElement.removeEventListener('mouseup', this.handleDocumentMouseup);
+                // this.on(this.document.documentElement, 'mouseup', this.handleDocumentMouseup.bind(this));
 
-            // Add a scroll event for sticky toolbar
-            if (this.static && this.sticky) {
-                // On scroll (capture), re-position the toolbar
-                this.on(this.window, 'scroll', this.handleWindowScroll.bind(this), true);
-            }
+                // Add a scroll event for sticky toolbar
+                if (this.static && this.sticky) {
+                        // On scroll (capture), re-position the toolbar
+                        $(this.window).off('scroll');
+                        $(this.window).on('scroll', this.handleWindowScroll.bind(this), true);
+                }
 
-            // On resize, re-position the toolbar
-            this.on(this.window, 'resize', this.handleWindowResize.bind(this));
+                // On resize, re-position the toolbar
+                $(this.window).off('resize');
+                $(this.window).on('resize', this.handleWindowResize.bind(this));
         },
-
+        
         handleWindowScroll: function () {
             this.positionToolbarIfShown();
         },
@@ -5974,7 +5979,8 @@ MediumEditor.extensions = {};
 
             // If the updateOnEmptySelection option is true, show the toolbar
             if (this.updateOnEmptySelection && this.static) {
-                this.trigger('hideToolbar', {}, this.base.getFocusedElement());
+                // this.trigger('hideToolbar', {}, this.base.getFocusedElement());
+                // this.trigger('hidedToolbar', {}, this.base.getFocusedElement());
                 return this.showAndUpdateToolbar();
             }
 
