@@ -7111,7 +7111,8 @@ MediumEditor.extensions = {};
             /*jslint regexp: true*/
             var fullAction = /^full-(.+)$/gi,
                 match,
-                result;
+                result,
+                elem = this.getSelectedParentElement();
             /*jslint regexp: false*/
 
             // Actions starting with 'full-' should be applied to to the entire contents of the editable element
