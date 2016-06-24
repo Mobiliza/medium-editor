@@ -847,7 +847,13 @@
                 // Restore the previous selection
                 this.restoreSelection();
             } else {
-                result = execActionInternal.call(this, action, opts);
+                if (action === 'subscript'){
+                  elem.localName === 'sub' ? result = execActionInternal.call(this, "removeFormat", opts) : result = execActionInternal.call(this, action, opts);
+                }else if(action === 'superscript'){
+                  elem.localName === 'sup' ? result = execActionInternal.call(this, "removeFormat", opts) : result = execActionInternal.call(this, action, opts);
+                }else{
+                  result = execActionInternal.call(this, action, opts);
+                }
             }
 
             // do some DOM clean-up for known browser issues after the action
