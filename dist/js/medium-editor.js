@@ -6831,7 +6831,8 @@ MediumEditor.extensions = {};
             childDivs = Array.prototype.slice.call(blockContainer.childNodes).filter(function (element) {
                 var isDiv = element.nodeName.toLowerCase() === 'div';
                 if (isDiv && !textAlign) {
-                    textAlign = element.style.textAlign;
+                    // textAlign = element.style.textAlign;
+                    textAlign = element.style.textAlign ? element.style.textAlign : element.align;
                 }
                 return isDiv;
             });
