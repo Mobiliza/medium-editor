@@ -900,7 +900,7 @@
             var focused;
             this.elements.some(function (element) {
                 // Find the element that has focus
-                if (!focused && element.getAttribute('data-medium-focused')) {
+                if (!focused && element.getAttribute('data-medium-editor-element')) {
                     focused = element;
                 }
 
